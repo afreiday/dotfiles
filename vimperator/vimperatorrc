@@ -1,0 +1,9 @@
+colorscheme zenburn
+
+set gui=nonavigation
+
+set focuscontent=true
+
+set hintchars='abcdefghij'
+
+set status=input,location,bookmark,history,tabcount,position,ssl
