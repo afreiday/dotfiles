@@ -1,21 +1,21 @@
-" Douglas Black
+" Launch Config {{{
+runtime! debian.vim
+execute pathogen#infect()
+filetype plugin indent on
+" }}}
+
+
 " Colors {{{
-set term=xterm
-set t_Co=256
 let &t_AB="\e[48;5;%dm"
+set term=xterm-256color
+set t_Co=256
 let &t_AF="\e[38;5;%dm"
-colorscheme monokai
+colorscheme onedark
 syntax enable           " enable syntax processing
-
-
+set t_ut=
 " }}}
-" Misc {{{
-set ttyfast                     " faster redraw
-" set backspace=indent,eol,start
-set backspace=2
 
 
-" }}}
 " Spaces & Tabs {{{
 set tabstop=2           " 2 space tab
 set expandtab           " use spaces for tabs
@@ -30,9 +30,9 @@ if has('gui_running')
   set lines=50 columns=200
 endif
 set noeb vb t_vb=
-
-
 " }}}
+
+
 " UI Layout {{{
 set number              " show line numbers
 set showcmd             " show command in bottom bar
@@ -40,25 +40,70 @@ set nocursorline          " highlight current line
 set wildmenu
 set lazyredraw
 set showmatch           " higlight matching parenthesis
-
-
 " }}}
+
+
 " Searching {{{
 set ignorecase          " ignore case when searching
 set incsearch           " search as characters are entered
 set hlsearch            " highlight all matches
+nnoremap <F3> :set hlsearch!<CR>
+" }}}
+
+
+" Jumping {{{
+function! GotoJump()
+  jumps
+  let j = input("Please select your jump: ")
+  if j != ''
+    let pattern = '\v\c^\+'
+    if j =~ pattern
+      let j = substitute(j, pattern, '', 'g')
+      execute "normal " . j . "\<c-i>"
+    else
+      execute "normal " . j . "\<c-o>"
+    endif
+  endif
+endfunction
+
+nnoremap <F2> :jumps<CR>
+nnoremap <F4> :call GotoJump()<cr>
+" }}}
+
+
+" Misc {{{
+map 0 ^ " Remap VIM 0 to first non-blank character
 
 set relativenumber
 
-set swapfile
-set undodir=~/tmp
-set dir=~/tmp
-
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
+set ttyfast                     " faster redraw
+" set backspace=indent,eol,start
+set backspace=2
 
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
+nnoremap <F6> :HackerNews<CR>
+
+nnoremap <C-J> m`o<Esc>``
+nnoremap <C-K> m`O<Esc>``
 " }}}
+
+
+" Tab navigation {{{
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+" }}} 
+
+
 " Leader Shortcuts {{{
 let mapleader=","
 nnoremap <leader>c :Commentary<CR>
@@ -77,24 +122,24 @@ vmap <C-v> <Plug>(expand_region_shrink)
 inoremap jk <esc>
 inoremap <Char-0x07F> <BS>
 nnoremap <Char-0x07F> <BS>
+" nnoremap <leader>q :q<CR>
+" nnoremap <leader><leader>qa :qa<CR>
 
-nnoremap <leader><leader>q :q<CR>
-nnoremap <leader><leader>qa :qa<CR>
-
+nnoremap <leader>Gb :Gblame<CR>
+nnoremap <leader>Gs :Gstatus<CR>
+nnoremap <leader>Gd :Gdiff<CR>
 " }}}
+
+
 " Window resizing {{{
 nnoremap <silent> <Leader>_ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 10/9)<CR>
 nnoremap <silent> <Leader>= :exe "vertical resize " . (winwidth(0) * 9/10)<CR>
-
-
 " }}}
+
+
 " Powerline {{{
-"set encoding=utf-8
-"python from powerline.vim import setup as powerline_setup
-"python powerline_setup()
-"python del powerline_setup
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_left_sep = ''
@@ -102,29 +147,22 @@ let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 set laststatus=2
-
-
 " }}}
+
+
 " CtrlP {{{
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|node_modules/|bin/|obj/|\.git/|packages/|target/|\.(o|swp|pyc|egg|dll|pdb|jpg|gif|png|ico|)$'
-
-
+let g:ctrlp_custom_ignore = '\vbuild/|dist/|release/|venv/|node_modules/|bin/|obj/|\.git/|packages/|target/|\.(o|swp|pyc|egg|dll|pdb|jpg|gif|png|ico|)$'
 " }}}
+
+
 " NERDTree {{{
-let NERDTreeIgnore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist', 'docs']
-
-
+let NERDTreeIgnore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist', 'docs', 'release']
 " }}}
-" Launch Config {{{
-runtime! debian.vim
-execute pathogen#infect()
-filetype plugin indent on
 
 
-" }}}
 " AutoGroups {{{
 augroup configgroup
     autocmd!
@@ -137,18 +175,21 @@ augroup configgroup
     autocmd BufEnter *.sh setlocal shiftwidth=2
     autocmd BufEnter *.sh setlocal softtabstop=2
 augroup END
-
-
 " }}}
-" Backups {{{
+
+
+" Backups/swap/temp {{{
 set backup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
-
-
+set swapfile
+set undodir=~/tmp
+set dir=~/tmp
 " }}}
+
+
 " Custom Functions {{{
 function! ToggleNumber()
     if(&relativenumber == 1)
@@ -209,8 +250,7 @@ endfunction
 " }}}
 
 
-" }}}
-" EasyMotion {{{
+" EasyMotion stuff {{{
 map <Leader>l <Plug>(easymotion-lineforward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
@@ -228,7 +268,6 @@ map <Leader>ge <Plug>(easymotion-ge)
 map <Leader>gE <Plug>(easymotion-gE)
 
 map <Leader>T <Plug>(easymotion-bd-t)
-
 
 map <Leader>l <Plug>(easymotion-bd-jk)
 " nmap <Leader>L <Plug>(easymotion-overwin-line)
@@ -249,34 +288,74 @@ map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-
-
 " }}}
-" TagBar {{{
-let g:tagbar_ctags_bin="$VIM/ctags.exe"
+
+
+" Tagbar {{{
+let g:tagbar_ctags_bin="ctags"
 let g:tagbar_autofocus=1
 let g:tagbar_compact=1
-let g:tagbar_show_linenumbers=2
-" let g:tagbar_autopreview=1
+let g:tagbar_show_linenumbers=1
+let g:tagbar_autopreview=1
 let g:tagbar_autoclose=1
 let g:tagbar_width=60
+nmap <F12> :TagbarShowTag<CR>
 
-
+let g:tagbar_type_typescript = {
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
+\ }
 " }}}
+
+
 " CamelCaseMotion {{{
-" map <silent> w <Plug>CamelCaseMotion_w
-" map <silent> b <Plug>CamelCaseMotion_b
-" map <silent> e <Plug>CamelCaseMotion_e
-" map <silent> ge <Plug>CamelCaseMotion_ge
-" sunmap w
-" sunmap b
-" sunmap e
-
-
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
 " }}}
+
+
+" vim-wheel {{{
+let g:wheel#map#up   = '<c-k>'
+let g:wheel#map#down = '<c-j>'
+" }}}
+
+
+" Selection search {{{
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+" }}}
+
+
+" Line movement {{{
+" Move a line of text using CTRL+[jk]
+nmap <C-j> mz:m+<cr>`z
+nmap <C-k> mz:m-2<cr>`z
+vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" }}}
+
+
 " Syntastic {{{
 nnoremap <Leader>sr :SyntasticReset<CR>
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -285,10 +364,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-
 " }}}
-" Autocomplete {{{
+
+
+" Autocomplete dialog {{{
 set completeopt=longest,menuone
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -299,35 +378,28 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 
 inoremap <expr> <C-j> pumvisible() ? '<C-n>' : ''
 inoremap <expr> <C-k> pumvisible() ? '<C-P>' : ''
-
-
+imap <expr> <C-l> pumvisible() ? '' : '<C-F><C-L>'
 " }}}
-" Misc {{{
 
-"" vim-wheel
-let g:wheel#map#up   = '<c-k>'
-let g:wheel#map#down = '<c-j>'
 
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
+" UndoTree {{{
+nnoremap <F5> :UndotreeToggle<cr>
+" }}}
 
-"" Editing mappings
 
-" Remap VIM 0 to first non-blank character
-map 0 ^
+" vim-bbyte {{{
+nnoremap <Leader>q :Bdelete<CR>
+nnoremap <Leader><Leader>q :bufdo :Bdelete<CR>
+nnoremap <Leader>Q :q<CR>
+" }}}
 
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" vim-bookmarks {{{
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
 
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=238 ctermfg=NONE
+let g:bookmark_sign = '♥'
+let g:bookmark_highlight_lines = 1
 " }}}
