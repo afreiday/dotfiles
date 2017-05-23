@@ -7,7 +7,9 @@ filetype plugin indent on
 
 " Colors {{{
 let &t_AB="\e[48;5;%dm"
-set term=xterm-256color
+if !has('nvim')
+  set term=xterm-256color
+endif
 set t_Co=256
 let &t_AF="\e[38;5;%dm"
 colorscheme onedark
