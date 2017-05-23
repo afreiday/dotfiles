@@ -108,8 +108,6 @@ nnoremap td  :tabclose<CR>
 
 " Leader Shortcuts {{{
 let mapleader=","
-nnoremap <leader>c :Commentary<CR>
-vnoremap <leader>c :Commentary<CR>
 nnoremap <leader>m :silent make\|redraw!\|cw<CR>
 nnoremap <leader>n :NERDTree<CR>
 nnoremap <leader>t :TagbarToggle<CR>
@@ -404,4 +402,12 @@ highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=238 ctermfg=NONE
 let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 1
+" }}}
+
+
+" nerdcommenter {{{
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 " }}}

@@ -11,6 +11,7 @@ git clone https://github.com/kien/ctrlp.vim.git
 git clone https://github.com/martinda/Jenkinsfile-vim-syntax.git
 git clone https://github.com/itchyny/lightline.vim.git
 git clone https://github.com/scrooloose/nerdtree.git
+git clone https://github.com/scrooloose/nerdcommenter.git
 git clone https://github.com/joshdick/onedark.vim.git
 git clone https://github.com/unblevable/quick-scope.git
 git clone https://github.com/vim-syntastic/syntastic.git
@@ -22,7 +23,6 @@ git clone https://github.com/moll/vim-bbye.git
 git clone https://github.com/MattesGroeger/vim-bookmarks.git
 git clone https://github.com/flazz/vim-colorschemes.git
 git clone https://github.com/xolox/vim-colorscheme-switcher.git
-git clone https://github.com/tpope/vim-commentary.git
 git clone https://github.com/easymotion/vim-easymotion.git
 git clone https://github.com/xolox/vim-easytags.git
 git clone https://github.com/eugen0329/vim-esearch.git
