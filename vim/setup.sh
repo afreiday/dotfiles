@@ -35,5 +35,6 @@ git clone https://github.com/mhinz/vim-signify.git
 git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/mhinz/vim-startify.git
 git clone https://github.com/tpope/vim-surround.git
+git clone https://github.com/christoomey/vim-tmux-navigator.git
 git clone https://github.com/bronson/vim-trailing-whitespace.git
 git clone https://github.com/wesQ3/vim-windowswap.vim
