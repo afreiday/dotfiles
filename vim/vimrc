@@ -42,6 +42,7 @@ set nocursorline          " highlight current line
 set wildmenu
 set lazyredraw
 set showmatch           " higlight matching parenthesis
+set ruler
 " }}}
 
 
@@ -323,13 +324,13 @@ let g:tagbar_type_typescript = {
 
 
 " CamelCaseMotion {{{
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
+" map <silent> w <plug>camelcasemotion_w
+" map <silent> b <plug>camelcasemotion_b
+" map <silent> e <plug>camelcasemotion_e
+" map <silent> ge <plug>camelcasemotion_ge
+" sunmap w
+" sunmap b
+" sunmap e
 " }}}
 
 
@@ -347,10 +348,10 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " Line movement {{{
 " Move a line of text using CTRL+[jk]
-nmap <C-j> mz:m+<cr>`z
-nmap <C-k> mz:m-2<cr>`z
-vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-k> :m'<-2<cr>`>my`<mzgv`yo`z
+nmap <S-j> mz:m+<cr>`z
+nmap <S-k> mz:m-2<cr>`z
+vmap <S-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <S-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " }}}
 
 
