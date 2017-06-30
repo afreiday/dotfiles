@@ -31,10 +31,12 @@ git clone https://github.com/airblade/vim-gitgutter.git
 git clone https://github.com/ryanss/vim-hackernews.git
 git clone https://github.com/nathanaelkane/vim-indent-guides.git
 git clone https://github.com/xolox/vim-misc.git
+git clone https://github.com/terryma/vim-multiple-cursors.git
 git clone https://github.com/mhinz/vim-signify.git
 git clone https://github.com/justinmk/vim-sneak.git
 git clone https://github.com/mhinz/vim-startify.git
 git clone https://github.com/tpope/vim-surround.git
+git clone https://github.com/tmux-plugins/vim-tmux.git
 git clone https://github.com/christoomey/vim-tmux-navigator.git
 git clone https://github.com/bronson/vim-trailing-whitespace.git
 git clone https://github.com/wesQ3/vim-windowswap.vim
