@@ -109,6 +109,7 @@ alias -g LC=" | lolcat"
 alias gbD="git branch -D"
 alias gpod="git push origin --delete"
 alias gai="git add --interactive"
+alias gap="git add -p"
 alias gsn="git shortlog -sn"
 
 if [[ $TERMINIX_ID ]]; then
