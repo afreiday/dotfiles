@@ -84,6 +84,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias -g C=" | tee /dev/clipboard"
+alias P="cat /dev/clipboard | tee "
+alias -g D=" && l"
+alias -g S=" | sort"
+alias -g T=" | tee"
+
+alias t="tree -I \"node_modules|bin|obj|packages\""
+alias td="t -d"
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
@@ -93,3 +101,26 @@ alias -g C="| lolcat"
 alias gs="git status"
 
 neofetch
+alias sgrepi='sgrep -i'
+alias sgrepp='sgrep -I --exclude-dir={node_modules,bin,obj} --exclude="*.min.*" --exclude="*.xml"'
+
+alias -g LC=" | lolcat"
+
+alias gbD="git branch -D"
+alias gpod="git push origin --delete"
+alias gai="git add --interactive"
+alias gsn="git shortlog -sn"
+
+if [[ $TERMINIX_ID ]]; then
+  source /etc/profile.d/vte.sh
+fi
+source ~/.config/up/up.sh
+
+source ~/.tmux.zshrc.sh
+
+VISUAL=vi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+alias  ag='ag --path-to-ignore ~/.agignore'
