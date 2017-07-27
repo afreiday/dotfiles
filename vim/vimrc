@@ -88,7 +88,9 @@ set backspace=2
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
+nnoremap <F1> :Startify<CR>
 nnoremap <F6> :HackerNews<CR>
+nnoremap <F7> :call ToggleNumber()<CR>
 
 nnoremap <C-J> m`o<Esc>``
 nnoremap <C-K> m`O<Esc>``
@@ -104,7 +106,7 @@ nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
-" }}} 
+" }}}
 
 
 " Leader Shortcuts {{{
@@ -403,8 +405,9 @@ highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=238 ctermfg=NONE
 let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 1
-" }}}
 
+nnoremap ma :CtrlPBookmark<CR>
+"}}}
 
 " nerdcommenter {{{
 let g:NERDSpaceDelims = 1
@@ -429,7 +432,7 @@ let g:startify_files_number = 8
 
 
 " fzf {{{
-nnoremap <C-O> :FZF<cr>
+nnoremap <C-[> :FZF<cr>
 let g:fzf_colors =
       \ { 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
@@ -444,3 +447,7 @@ let g:fzf_colors =
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
 " }}}
+
+
+
+unmap <esc>
