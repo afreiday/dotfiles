@@ -40,5 +40,6 @@ git clone https://github.com/tmux-plugins/vim-tmux.git
 git clone https://github.com/christoomey/vim-tmux-navigator.git
 git clone https://github.com/bronson/vim-trailing-whitespace.git
 git clone https://github.com/wesQ3/vim-windowswap.vim
+git clone https://github.com/vim-scripts/AutoComplPop.git
 
 ln -s ~/.fzf/ ./fzf
