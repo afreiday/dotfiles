@@ -43,5 +43,6 @@ git clone https://github.com/wesQ3/vim-windowswap.vim
 git clone https://github.com/vim-scripts/AutoComplPop.git
 git clone https://github.com/gcmt/wildfire.vim.git
 git clone https://github.com/kien/tabman.vim.git
+git clone https://github.com/Xuyuanp/nerdtree-git-plugin.git
 
 ln -s ~/.fzf/ ./fzf
