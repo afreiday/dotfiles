@@ -92,6 +92,7 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 nnoremap <F1> :Startify<CR>
 nnoremap <F6> :HackerNews<CR>
 nnoremap <F7> :call ToggleNumber()<CR>
+nnoremap <C-z> :term<CR>
 
 nnoremap <C-J> m`o<Esc>``
 nnoremap <C-K> m`O<Esc>``
@@ -99,10 +100,10 @@ nnoremap <C-K> m`O<Esc>``
 
 
 " Tab navigation {{{
-nnoremap th  :tabfirst<CR>
+nnoremap t0  :tabfirst<CR>
 nnoremap tj  :tabnext<CR>
 nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
+nnoremap t$  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
