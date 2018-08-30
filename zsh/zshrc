@@ -83,9 +83,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-#
+
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
+
+###
+### ALIASES
+###
 
 alias -g C=" | tee /dev/clipboard"
 alias P="cat /dev/clipboard | tee "
@@ -119,36 +122,53 @@ alias gap="git add -p"
 alias gsn="git shortlog -sn"
 alias gfal="gfa; gl"
 
+alias  ag='ag --path-to-ignore ~/.agignore'
+
+alias vim=nvim
+VISUAL=vi
+
+###
+### FUNCTIONS
+###
+
 function cdl() {
   cd $1 && ls
 }
 
+###
+### IMPORTS
+###
+
 if [[ $TERMINIX_ID ]]; then
   source /etc/profile.d/vte.sh
 fi
-source ~/.config/up/up.sh
 
+source ~/.config/up/up.sh
 source ~/.tmux.zshrc.sh
+
+###
+### ANTIGEN
+###
 
 source ~/antigen.zsh
 antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
-VISUAL=vi
-
-#neofetch
-
+###
+### FZF
+###
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-alias  ag='ag --path-to-ignore ~/.agignore'
-
-alias vim=nvim
-
+###
+### NVM
+###
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # ignore fzf history duplicates
 setopt HIST_IGNORE_ALL_DUPS
+
+neofetch
