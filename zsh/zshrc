@@ -153,6 +153,7 @@ source ~/.tmux.zshrc.sh
 source ~/antigen.zsh
 antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen apply
 
 ###
 ### FZF
