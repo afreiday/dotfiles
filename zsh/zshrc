@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast common-aliases wd tmux colorize zsh-autosuggestions gulp wd tmux tmuxinator z vi-mode ubuntu npm sudo)
+plugins=(git gitfast common-aliases wd colorize zsh-autosuggestions gulp wd tmux tmuxinator z vi-mode ubuntu npm sudo fzf brew cask aws)
 
 source $ZSH/oh-my-zsh.sh
 
