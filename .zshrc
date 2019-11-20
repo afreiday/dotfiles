@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast common-aliases wd colorize zsh-autosuggestions gulp wd tmux tmuxinator z vi-mode ubuntu npm sudo fzf brew cask aws)
+plugins=(git gitfast common-aliases wd colorize tmux tmuxinator z vi-mode ubuntu npm sudo fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -135,6 +135,10 @@ function cdl() {
   cd $1 && ls
 }
 
+function mcd() {
+  mkdir $1 && cd $1
+}
+
 ###
 ### IMPORTS
 ###
@@ -171,5 +175,9 @@ export NVM_DIR="$HOME/.nvm"
 
 # ignore fzf history duplicates
 setopt HIST_IGNORE_ALL_DUPS
+
+# setup some nicer colors for directory listing/completion
+eval `dircolors ~/Git/dircolors-solarized/dircolors.256dark`
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 neofetch
