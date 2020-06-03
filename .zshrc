@@ -20,7 +20,7 @@ HYPHEN_INSENSITIVE="true"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=2
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast common-aliases wd colorize tmux tmuxinator z vi-mode ubuntu npm sudo fzf)
+plugins=(git gitfast common-aliases wd vi-mode ubuntu npm sudo fzf grunt colored-man-pages tmux tmuxinator ng)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,7 +90,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=6'
 ### ALIASES
 ###
 
-alias -g C=" | tee /dev/clipboard"
+alias ls="exa"
+alias la="exa -la"
+
+#alias -g C=" | tee /dev/clipboard"
+alias -g C=" | clip.exe"
 alias P="cat /dev/clipboard | tee "
 alias -g D=" && l"
 alias -g S=" | sort"
@@ -99,9 +103,7 @@ alias -g T=" | tee"
 alias t="tree -I \"node_modules|bin|obj|packages\""
 alias td="t -d"
 
-alias ps="ps -W"
 alias watch="watch -d -n1"
-alias top="top -d0"
 alias cat="bat"
 
 alias weather="ansiweather -a false -l Aurora Canada"
@@ -124,19 +126,41 @@ alias gfal="gfa; gl"
 
 alias  ag='ag --path-to-ignore ~/.agignore'
 
+alias scripts='jq ".scripts" package.json'
+
 alias vim=nvim
 VISUAL=vi
+
+alias docker="docker.exe"
 
 ###
 ### FUNCTIONS
 ###
 
 function cdl() {
-  cd $1 && ls
+  cd $1 && la
 }
 
 function mcd() {
   mkdir $1 && cd $1
+}
+
+function gcc() {
+  git checkout -- $1 && git clean -xfd $1 && git status
+}
+
+function gscp() {
+  git stash && git checkout $1 && git stash pop
+}
+
+function db() {
+  docker exec -it $1 bash
+}
+
+function kill-sessions() {
+  tmux list-sessions | grep -E -v '\(attached\)$' | while IFS='\n' read line; do
+    tmux kill-session -t "${line%%:*}"
+  done
 }
 
 ###
@@ -169,9 +193,11 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ###
 ### NVM
 ###
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+function loadnvm() {
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
 
 # ignore fzf history duplicates
 setopt HIST_IGNORE_ALL_DUPS
